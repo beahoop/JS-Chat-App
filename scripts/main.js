@@ -1,5 +1,3 @@
-(function () {
-  'use strict';
 
 const BASE_URL = 'https://tiny-taco-server.herokuapp.com/api/v1/chats'
 
@@ -16,20 +14,116 @@ const BASE_URL = 'https://tiny-taco-server.herokuapp.com/api/v1/chats'
     const context = data;
     const html = template(context);
     document.querySelector(".message").innerHTML = html;
-  }
+  };
 
-setInterval(()=>{ fetch(BASE_URL)
+
+setInterval(() => { fetch(BASE_URL)
     .then(response => response.json())
     .then(data => generateUser({user:data}));}, 1000);
+    // data.reverse() ...then make {user:data}
+
+//////////////////////////////////////POST
+const todo = {
+   text: "",
+     username: "",
+   };
+
+function msgClick() {
+     msgText = document.getElementById('messInput').value;
+     guestName = document.getElementById('userInput').value;
+     document.getElementById('displayMessage').innerHTML = msgText;
+     todo.text = msgText;
+     todo.username = guestName;
+     sendMessage();
+  };
+
+function sendMessage(data) {
+    fetch(`${BASE_URL}/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(todo),
+    })
+      .then(response => {
+      if(!response.ok){
+        throw new Error ('Bad Post request');
+      }
+      return response.json()
+      })
+    .then(data => console.log('Success. Todo created!'))
+    .catch(error => console.log('Error:', error))
+    .finally('I am always going to fire!');
+};
+/////////////////////////////////////////PUT
+
+// grab the id.value of button click
+// prompt me what is your new message
+// prompt
+
+const edit = {
+    // id: "",
+    text: "",
+    username: "",
+}
+
+// getID = document.querySelector(data.id);
+
+
+function editMsg() {
+    const editPrompt = prompt('Enter new message');
+    const editUser = prompt('Enter Username');
+     msgText = document.getElementById('messInput').value;
+     guestName = document.getElementById('userInput').value;
+     msgText = editPrompt;
+     guestName = editUser;
+     // document.getElementById('displayMessage').innerHTML = msgText;
+     edit.text = msgText;
+     edit.username = guestName;
+     editMessage();
+  };
+
+function generateLog(data) {
+  for (let i = 0; i < data.length; i++) {
+  console.log(data[i].id);
+}
+};
+function getUser() {
+    return fetch(BASE_URL)
+        .then(response => response.json())
+        .then(data => generateLog(data));
+};
+
+getUser();
+
+function editMessage(data) {
+
+  fetch(`${BASE_URL}/[i]/`,{
+  method: 'PUT',
+  headers: {
+    'Content-Type':'application/json',
+  },
+  body: JSON.stringify(edit),
+})
+.then(response => response.json())
+.then(data => {
+  console.log('data', data);
+});
+};
 
 
 
 
 
-
-
-
-})();
+/////////////////////////////////DELETE
+function deleteMsg() {
+     msgText = document.getElementById('messInput').value ;
+     guestName = document.getElementById('userInput').value;
+     document.getElementById('displayMessage').innerHTML = msgText;
+     todo.text = msgText;
+     todo.username = guestName;
+     sendMessage();
+  };
 
 ///html css and js
 ///input for message

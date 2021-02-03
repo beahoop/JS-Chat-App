@@ -6,20 +6,35 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/8ee7b0e5d5.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./styles/base.css">
-  <title></title>
+  <title>Js Chat App</title>
 </head>
 
 <body class="container">
 
 <label for="input">Message</label>
-<input type="text" class="col-6" id="input" placeholder="Type your message here...">
+
+<input type="text" class="col-12" id="messInput" placeholder="Type your message here...">
+<label for="input">Username</label>
+
+<input type="text" class="col-12" id="userInput" placeholder="Type your username here...">
+
+<button class="sumbit" type="button" onclick="msgClick()" >Sumbit</button>
+
+
+<span>Your message</span>
+<div id="displayMessage"></div>
+
   <div class="message">
   </div>
+
+
   <script id="usertext" type="text/x-handlebars-template">
     {{#each user}}
       <div class="row parent">
         <p class="user-message">{{this.text}}</p>
         <p class="user-name">{{this.username}}</p>
+        <button onclick="deleteMsg()"><i class="fas fa-trash-alt"></i></button>
+        <button onclick="editMsg()" class="editBtn" value="{{this.id}}"><i class="far fa-edit"></i></button>
       </div>
     {{/each}}
   </script>
