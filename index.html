@@ -10,14 +10,12 @@
 </head>
 
 <body class="container">
+  <p class="welcome">WELCOME TO JS CHAT 2021</p>
 
 <label for="input">Message</label>
-
 <input type="text" class="col-12" id="messInput" placeholder="Type your message here...">
 <label for="input">Username</label>
-
 <input type="text" class="col-12" id="userInput" placeholder="Type your username here...">
-
 <button class="sumbit" type="button" onclick="msgClick()" >Sumbit</button>
   <div class="message">
   </div>
@@ -25,20 +23,20 @@
 
   <script id="usertext" type="text/x-handlebars-template">
     {{#each user}}
-      <div class="row parent">
-        <div class="col-12 userinfo">
+      <div class="row g-10 parent">
+        <div class="col-8 userinfo">
         <div class="row">
-
         <p class="col-12 user-name">{{this.username}} said:</p>
         <p class="col-12 user-message ">{{this.text}}</p>
       </div>
         </div>
-        <div class="col-6 btninfo">
-        <div class="row">
+        <div class="col-3 btninfo">
+        <div class="row buttons">
+          <p class="userID col-12"> Post Number:{{this.id}}</p>
         <button onclick="deleteMessage()" class="col-2 deleteBtn" value="{{this.id}}">
           <i class="fas fa-trash-alt"></i></button>
         <button onclick="editMsg()" class="col-2 editBtn" value="{{this.id}}"><i class="far fa-edit"></i></button>
-          <p class="userID"> Post Number:{{this.id}}</p>
+
       </div>
         </div>
       </div>

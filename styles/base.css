@@ -8,6 +8,17 @@ body {
 
 }
 
+.welcome {
+  color: #fff;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bolder;
+  border-bottom: 3px solid #fff;
+}
+.userinfo{
+  border: 3px solid #fff;
+  border-radius: 10px;
+}
 p {
   color: white;
   text-align: center;
@@ -21,7 +32,10 @@ p {
   text-align: center;
   margin-left: 50px;
 }
-
 .userID {
-  margin-bottom: 10px;
+  text-align: left;
+}
+
+.buttons {
+  
 }
