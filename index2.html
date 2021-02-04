@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./styles/bootstrap.min.css">
+  <link rel="stylesheet" href="./styles/styles.css">
+
+  <title>Chat 'Em Up!</title>
+</head>
+
+<body>
+  <div class="container">
+
+    <section class="row">
+      <div class="inputFields leftside col-4">
+        <div class="row">
+        <div class="row" class="nameInputWindow">
+          <input placeholder="Sender name" id="nameWindow" type="text"><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="messageInput interface">
+          <div class="row" class="messageInputWindow">
+            <input class="window" placeholder="Type your message" id="messageWindow" type="text"><br>
+            <button onclick="msgClick()" value="Send Message">Send Message</button>
+          </div>
+        </div>
+      </div>
+        <div class="row deletionWindow">
+          <input placeholder="ID of message to delete" id="deleteWindow" type="text"><br>
+          <input type="button" onclick="deleteMessage()" value="Delete message!">
+        </div>
+        <div class="row editWindow">
+          <input type="button" onclick="editMessage()" value="Edit Message">
+        </div>
+      </div>
+      <div class="messageScroll rightside col-8">
+        <div class="nameDisplay window">Name: <span id="displayName"></span></div>
+        <div class="msgDisplay">Message: <span id="displayMessage"></span></div>
+        <div class="message"></div>
+      </div>
+    </section>
+  </div>
+
+
+  <script id="usertext" type="text/x-handlebars-template">
+    {{#each user}}
+      <div class="row parent">
+        <p><br></p>
+        <span class="user-name">From: {{this.username}}</span>
+        <span class="user-message">Message: {{this.text}}</span>
+        <span class="msgID">ID: {{this.id}}</span>
+    {{/each}}
+  </script>
+
+
+
+  </div>
+
+
+
+  <script src="https://kit.fontawesome.com/e501839246.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
+  <script src="./scripts/main2.js"></script>
+</body>
+
+</html>

@@ -1,12 +1,14 @@
 
 const BASE_URL = 'https://tiny-taco-server.herokuapp.com/api/v1/chats'
 
-// fetch(BASE_URL)
-//   .then(response => response.json())
-//   .then(data => console.log(data))
-//   .catch(error => console.log(error))
-//   .finally(() => console.log("This always runs"));
+const edit = {
+    id: "",
+    text: "",
+    username: "",
+}
 
+
+////////////////////////////
 
   const generateUser = (data) => {
     const source = document.getElementById("usertext").innerHTML;
@@ -23,27 +25,25 @@ setInterval(() => { fetch(BASE_URL)
     // data.reverse() ...then make {user:data}
 
 //////////////////////////////////////POST
-const todo = {
-   text: "",
-     username: "",
-   };
+
 
 function msgClick() {
      msgText = document.getElementById('messInput').value;
      guestName = document.getElementById('userInput').value;
-     document.getElementById('displayMessage').innerHTML = msgText;
-     todo.text = msgText;
-     todo.username = guestName;
+     edit.text = msgText;
+     edit.username = guestName;
+     document.getElementById('messInput').value = "";
+     document.getElementById('userInput').value = "";
      sendMessage();
   };
 
-function sendMessage(data) {
+function sendMessage() {
     fetch(`${BASE_URL}/`, {
       method: 'POST',
       headers: {
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
       },
-      body: JSON.stringify(todo),
+      body: JSON.stringify(edit),
     })
       .then(response => {
       if(!response.ok){
@@ -51,7 +51,7 @@ function sendMessage(data) {
       }
       return response.json()
       })
-    .then(data => console.log('Success. Todo created!'))
+    .then(data => console.log('Success. Message created!'))
     .catch(error => console.log('Error:', error))
     .finally('I am always going to fire!');
 };
@@ -61,69 +61,85 @@ function sendMessage(data) {
 // prompt me what is your new message
 // prompt
 
-const edit = {
-    // id: "",
-    text: "",
-    username: "",
-}
-
-// getID = document.querySelector(data.id);
-
 
 function editMsg() {
     const editPrompt = prompt('Enter new message');
     const editUser = prompt('Enter Username');
-     msgText = document.getElementById('messInput').value;
-     guestName = document.getElementById('userInput').value;
+    const editId = document.querySelector(".editBtn").value;
+    // console.log(editId);
+     msgText = document.getElementById('messInput').innerHTML;
+     guestName = document.getElementById('userInput').innerHTML;
      msgText = editPrompt;
      guestName = editUser;
+     // sameID = editId;
      // document.getElementById('displayMessage').innerHTML = msgText;
+     // edit.id = sameID;
      edit.text = msgText;
      edit.username = guestName;
      editMessage();
   };
 
-function generateLog(data) {
-  for (let i = 0; i < data.length; i++) {
-  console.log(data[i].id);
-}
-};
-function getUser() {
-    return fetch(BASE_URL)
-        .then(response => response.json())
-        .then(data => generateLog(data));
-};
-
-getUser();
-
 function editMessage(data) {
-
-  fetch(`${BASE_URL}/[i]/`,{
-  method: 'PUT',
-  headers: {
-    'Content-Type':'application/json',
-  },
-  body: JSON.stringify(edit),
-})
-.then(response => response.json())
-.then(data => {
-  console.log('data', data);
-});
+const btnValue = document.querySelector(".editBtn").value;
+let editBtn = prompt(`To confirm your edit request type post number`)
+  fetch(`${BASE_URL}/${editBtn}/`,{
+    method: 'PUT',
+    headers: {
+      'Content-Type':'application/json',
+    },
+    body: JSON.stringify(edit),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('data', data);
+  });
 };
-
-
-
 
 
 /////////////////////////////////DELETE
-function deleteMsg() {
-     msgText = document.getElementById('messInput').value ;
-     guestName = document.getElementById('userInput').value;
-     document.getElementById('displayMessage').innerHTML = msgText;
-     todo.text = msgText;
-     todo.username = guestName;
-     sendMessage();
-  };
+//
+// const bye = {
+//     // id: "",
+//     text: "",
+//     username: "",
+// }
+//
+
+
+
+
+
+// Add a handler for the 'click' event by providing a callback function.
+// Whenever the element is clicked, a pop-up with "Element clicked!" will
+// appear.
+// numberButtons.forEach(function (btn) {
+//     btn.addEventListener('click', setNumsVal)
+//     //adding in the eventlister so the buttons will respond to the user's actions and show in the cal screen
+// });
+// const deleteButtons = document.querySelector('.deleteBtn');
+// deleteButtons.forEach(function (btn) {
+//     btn.addEventListener('click', deleteMessage)
+//   });
+//
+
+function deleteMessage() {
+  // const btnDelete = document.querySelector(".deleteBtn").value
+  // let btnDelete = document.querySelector(".deleteBtn").value;
+  // let deleteID = prompt(`To confirm your delete request type ${btnDelete}`)
+  let deleteID = prompt(`To confirm your delete request type post number`)
+  fetch(`${BASE_URL}/${deleteID}/`, {
+  method: 'DELETE',
+})
+.then(response => response.json())
+.then(data => console.log('data', data))
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Bad delete request');
+  }
+})
+.catch(error => console.log('Error:', error))
+.finally(() => console.log("Yes, it worked."));
+}
 
 ///html css and js
 ///input for message
